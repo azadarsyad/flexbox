@@ -1,0 +1,23 @@
+.bg-header {
+  background-color: #0640a3;
+}
+
+.hero-height {
+  height: 80vh;
+}
+
+.hero-shorter-height {
+  height: 60vh;
+}
+
+.text-blue-white {
+  color: #f2f8ff;
+}
+
+.hero-title-1 {
+  color: #afd3ff;
+  font-size: 49px;
+  font-weight: bold;
+  letter-spacing: 1.13px;
+  line-height: 66px;
+}
