@@ -60713,7 +60713,7 @@ if (false) {} else {
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
   \***************************************************************/
-/*! exports provided: MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext, BrowserRouter, HashRouter, Link, NavLink */
+/*! exports provided: BrowserRouter, HashRouter, Link, NavLink, MemoryRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, withRouter, __RouterContext */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65734,6 +65734,17 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
+/***/ "./resources/js/components/EstimateForm.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/EstimateForm.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/shads/Code/flexbox/resources/js/components/EstimateForm.js: Unexpected token (12:6)\n\n\u001b[0m \u001b[90m 10 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 11 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mdefault\u001b[39m \u001b[36mclass\u001b[39m \u001b[33mEstimateForm\u001b[39m \u001b[36mextends\u001b[39m \u001b[33mReact\u001b[39m\u001b[33m.\u001b[39m\u001b[33mComponent\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 | \u001b[39m  \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate \u001b[33m=\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m      \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 13 | \u001b[39m    selectedOption\u001b[33m:\u001b[39m \u001b[36mnull\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 14 | \u001b[39m  }\u001b[0m\n\u001b[0m \u001b[90m 15 | \u001b[39m  handleChange \u001b[33m=\u001b[39m (selectedOption) \u001b[33m=>\u001b[39m {\u001b[0m\n    at Object.raise (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:3851:17)\n    at Object.unexpected (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:5167:16)\n    at Object.parseClassMemberWithIsStatic (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8232:12)\n    at Object.parseClassMember (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8128:10)\n    at withTopicForbiddingContext (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8083:14)\n    at Object.withTopicForbiddingContext (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:7185:14)\n    at Object.parseClassBody (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8060:10)\n    at Object.parseClass (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8034:22)\n    at Object.parseExportDefaultExpression (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8459:19)\n    at Object.parseExport (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8365:31)\n    at Object.parseStatementContent (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:7395:27)\n    at Object.parseStatement (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:7291:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:7868:25)\n    at Object.parseBlockBody (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:7855:10)\n    at Object.parseTopLevel (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:7220:10)\n    at Object.parse (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:8863:17)\n    at parse (/Users/shads/Code/flexbox/node_modules/@babel/parser/lib/index.js:11135:38)\n    at parser (/Users/shads/Code/flexbox/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/Users/shads/Code/flexbox/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/Users/shads/Code/flexbox/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/Users/shads/Code/flexbox/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at process.nextTick (/Users/shads/Code/flexbox/node_modules/@babel/core/lib/transform.js:34:34)\n    at process._tickCallback (internal/process/next_tick.js:61:11)");
+
+/***/ }),
+
 /***/ "./resources/js/components/Header.js":
 /*!*******************************************!*\
   !*** ./resources/js/components/Header.js ***!
@@ -65794,6 +65805,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _EstimateForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EstimateForm */ "./resources/js/components/EstimateForm.js");
+/* harmony import */ var _EstimateForm__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_EstimateForm__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -65810,9 +65824,7 @@ var Hero = function Hero() {
     className: "hero-title-2 flex pt-8"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
     src: "/images/Chevron_right.png"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-col"
-  })));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_EstimateForm__WEBPACK_IMPORTED_MODULE_2___default.a, null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Hero);
