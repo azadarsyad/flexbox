@@ -6,12 +6,22 @@ import { type } from 'os';
 import { Duplex } from 'stream';
 
 import { components } from 'react-select';
-const { Option } = components;
+const { Option, SingleValue, DropdownIndicator } = components;
 const IconOption = (props) => (
     <Option {...props}>
       <span className="flex"><img className="mx-4" src={props.data.image}></img>{props.data.label}</span>
     </Option>
 );
+
+const IconSingleValue = (props) => (
+  <SingleValue {...props}>
+    <span className="flex"><img className="mx-4" src={props.data.image}></img>{props.data.label}</span>
+  </SingleValue>
+);
+
+const SearchDropDown = () => {
+    return <i className="fas fa-search mx-2 text-grey hover:text-black py-2 pl-1"></i>;
+};
 
 const getList = (inputValue: string) => {
   if(inputValue == ""){
@@ -51,7 +61,15 @@ export default class ApiSelect extends Component {
           loadOptions={promiseOptions}
           defaultOptions
           placeholder="Search Benchmark"
-          components={{ Option: IconOption }}
+          isClearable={true}
+          components={{ Option: IconOption, SingleValue: IconSingleValue }}
+          styles={{
+            dropdownIndicator: (base, state) => ({
+              ...base,
+              transition: "all .4s ease",
+              transform: state.selectProps.menuIsOpen ? "rotate(180deg)" : null
+            })
+          }}
         />
       </div>
     );

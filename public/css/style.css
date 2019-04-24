@@ -28433,7 +28433,7 @@ table {
 }
 
 .hero-height {
-  height: 80vh;
+  height: 75vh;
 }
 
 .hero-shorter-height {
@@ -28453,27 +28453,68 @@ table {
 }
 
 .single-select__control {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
   font-size: 1rem;
+  cursor: pointer !important;
+}
+
+.single-select__control:hover .single-select__single-value {
+  color: blue !important;
 }
 
 .single-select__option {
   border-bottom: .01em solid #d7d7d7 !important;
-  padding: 20px !important;
+  padding: 30px !important;
+  cursor: pointer !important;
 }
 
 .api-select__control {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
   font-size: 1rem;
+  cursor: pointer !important;
 }
 
 .api-select__option {
   border-bottom: .01em solid #d7d7d7 !important;
-  padding: 20px !important;
+  padding: 30px !important;
+  cursor: pointer !important;
+}
+
+.react-rotating-text-cursor {
+  -webkit-animation: blinking-cursor .8s cubic-bezier(.68, .01, .01, .99) 0s infinite;
+          animation: blinking-cursor .8s cubic-bezier(.68, .01, .01, .99) 0s infinite;
+}
+
+@-webkit-keyframes blinking-cursor {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes blinking-cursor {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }

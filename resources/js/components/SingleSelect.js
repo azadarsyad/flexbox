@@ -41,6 +41,13 @@ export default class SingleSelect extends Component<*, State> {
           name="industry"
           options={industryOptions}
           placeholder="Choose Your Industry..."
+          styles={{
+            dropdownIndicator: (base, state) => ({
+              ...base,
+              transition: "all .4s ease",
+              transform: state.selectProps.menuIsOpen ? "rotate(180deg)" : null
+            })
+          }}
         />
       </Fragment>
     );

@@ -65593,6 +65593,226 @@ function polyfill(Component) {
 
 /***/ }),
 
+/***/ "./node_modules/react-rotating-text/lib/ReactRotatingText.js":
+/*!*******************************************************************!*\
+  !*** ./node_modules/react-rotating-text/lib/ReactRotatingText.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+var PropTypes = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+
+var ReactRotatingText = (function (_React$Component) {
+  _inherits(ReactRotatingText, _React$Component);
+
+  function ReactRotatingText(props) {
+    _classCallCheck(this, ReactRotatingText);
+
+    _get(Object.getPrototypeOf(ReactRotatingText.prototype), 'constructor', this).call(this, props);
+    this.state = {
+      index: 0,
+      output: '',
+      substrLength: 0
+    };
+    this.timeouts = [];
+  }
+
+  _createClass(ReactRotatingText, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this._animate.bind(this)(); // begin the animation loop
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      this.timeouts.map(function (x) {
+        return clearTimeout(x);
+      }); // stop all the loops
+    }
+  }, {
+    key: '_loop',
+    value: function _loop(loopingFunc, pause) {
+      // save the timeouts so we can stop on unmount
+      var timeout = setTimeout(loopingFunc, pause);
+      this.timeouts.push(timeout);
+
+      // prevent memory leak
+      var maxTimeouts = 100;
+      if (this.timeouts.length > maxTimeouts) {
+        clearTimeout(this.timeouts[0]);
+        this.timeouts.shift();
+      }
+    }
+  }, {
+    key: '_type',
+    value: function _type(text, callback) {
+      var output = this.state.output;
+      var typingInterval = this.props.typingInterval;
+
+      var loopingFunc = this._type.bind(this, text, callback);
+
+      // set the string one character longer
+      this.setState({ output: text.substr(0, output.length + 1) });
+
+      // if we're still not done, recursively loop again
+      if (output.length < text.length) {
+        this._loop(loopingFunc, typingInterval);
+      } else {
+        callback();
+      }
+    }
+  }, {
+    key: '_erase',
+    value: function _erase(callback) {
+      var output = this.state.output;
+      var deletingInterval = this.props.deletingInterval;
+
+      var loopingFunc = this._erase.bind(this, callback);
+
+      // set the string one character shorter
+      this.setState({ output: output.substr(0, output.length - 1) });
+
+      // if we're still not done, recursively loop again
+      if (output.length !== 0) {
+        this._loop(loopingFunc, deletingInterval);
+      } else {
+        callback();
+      }
+    }
+  }, {
+    key: '_overwrite',
+    value: function _overwrite(text, callback) {
+      var _state = this.state;
+      var output = _state.output;
+      var substrLength = _state.substrLength;
+      var deletingInterval = this.props.deletingInterval;
+
+      var loopingFunc = this._overwrite.bind(this, text, callback);
+
+      this.setState({
+        output: text.substr(0, substrLength) + output.substr(substrLength),
+        substrLength: substrLength + 1
+      });
+
+      if (text.length !== substrLength) {
+        this._loop(loopingFunc, deletingInterval);
+      } else {
+        this.setState({
+          output: text,
+          substrLength: 0
+        });
+        callback();
+      }
+    }
+  }, {
+    key: '_animate',
+    value: function _animate() {
+      var _this = this;
+
+      var index = this.state.index;
+      var _props = this.props;
+      var items = _props.items;
+      var pause = _props.pause;
+      var emptyPause = _props.emptyPause;
+      var eraseMode = _props.eraseMode;
+
+      var type = this._type;
+      var erase = this._erase;
+      var overwrite = this._overwrite;
+      var loopingFunc = this._animate.bind(this);
+      var nextIndex = index === items.length - 1 ? 0 : index + 1;
+
+      var nextWord = function nextWord() {
+        _this.setState({ index: nextIndex });
+        _this._loop(loopingFunc, emptyPause);
+      };
+
+      type.bind(this)(items[index], function () {
+        if (eraseMode === 'overwrite') {
+          _this._loop(overwrite.bind(_this, items[nextIndex], nextWord), pause);
+        } else {
+          _this._loop(erase.bind(_this, nextWord), pause);
+        }
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props2 = this.props;
+      var color = _props2.color;
+      var cursor = _props2.cursor;
+      var deletingInterval = _props2.deletingInterval;
+      var emptyPause = _props2.emptyPause;
+      var items = _props2.items;
+      var pause = _props2.pause;
+      var eraseMode = _props2.eraseMode;
+      var typingInterval = _props2.typingInterval;
+
+      var other = _objectWithoutProperties(_props2, ['color', 'cursor', 'deletingInterval', 'emptyPause', 'items', 'pause', 'eraseMode', 'typingInterval']);
+
+      return React.createElement(
+        'span',
+        _extends({ style: { color: color } }, other),
+        this.state.output,
+        cursor ? React.createElement(
+          'span',
+          { className: 'react-rotating-text-cursor' },
+          '|'
+        ) : null
+      );
+    }
+  }]);
+
+  return ReactRotatingText;
+})(React.Component);
+
+ReactRotatingText.propTypes = {
+  color: PropTypes.string,
+  cursor: PropTypes.bool,
+  deletingInterval: PropTypes.number,
+  emptyPause: PropTypes.number,
+  eraseMode: PropTypes.string,
+  items: PropTypes.array,
+  pause: PropTypes.number,
+  typingInterval: PropTypes.number
+};
+
+ReactRotatingText.defaultProps = {
+  color: 'inherit',
+  cursor: true,
+  deletingInterval: 50,
+  emptyPause: 1000,
+  eraseMode: 'erase',
+  items: ['first', 'second', 'third'],
+  pause: 1500,
+  typingInterval: 50
+};
+
+exports['default'] = ReactRotatingText;
+module.exports = exports['default'];
+
+/***/ }),
+
 /***/ "./node_modules/react-router-dom/esm/react-router-dom.js":
 /*!***************************************************************!*\
   !*** ./node_modules/react-router-dom/esm/react-router-dom.js ***!
@@ -86911,6 +87131,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -86933,7 +87157,9 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Option = react_select__WEBPACK_IMPORTED_MODULE_5__["components"].Option;
+var Option = react_select__WEBPACK_IMPORTED_MODULE_5__["components"].Option,
+    SingleValue = react_select__WEBPACK_IMPORTED_MODULE_5__["components"].SingleValue,
+    DropdownIndicator = react_select__WEBPACK_IMPORTED_MODULE_5__["components"].DropdownIndicator;
 
 var IconOption = function IconOption(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Option, props, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -86942,6 +87168,21 @@ var IconOption = function IconOption(props) {
     className: "mx-4",
     src: props.data.image
   }), props.data.label));
+};
+
+var IconSingleValue = function IconSingleValue(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(SingleValue, props, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+    className: "flex"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "mx-4",
+    src: props.data.image
+  }), props.data.label));
+};
+
+var SearchDropDown = function SearchDropDown() {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+    className: "fas fa-search mx-2 text-grey hover:text-black py-2 pl-1"
+  });
 };
 
 var getList = function getList(inputValue) {
@@ -86996,8 +87237,18 @@ function (_Component) {
         loadOptions: promiseOptions,
         defaultOptions: true,
         placeholder: "Search Benchmark",
+        isClearable: true,
         components: {
-          Option: IconOption
+          Option: IconOption,
+          SingleValue: IconSingleValue
+        },
+        styles: {
+          dropdownIndicator: function dropdownIndicator(base, state) {
+            return _objectSpread({}, base, {
+              transition: "all .4s ease",
+              transform: state.selectProps.menuIsOpen ? "rotate(180deg)" : null
+            });
+          }
         }
       }));
     }
@@ -87142,6 +87393,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+var ReactRotatingText = __webpack_require__(/*! react-rotating-text */ "./node_modules/react-rotating-text/lib/ReactRotatingText.js");
+
 var Hero = function Hero() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "bg-header hero-height"
@@ -87151,13 +87404,28 @@ var Hero = function Hero() {
     className: "flex flex-col"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "hero-title-1"
-  }, "Software Development ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "and Design as a Service "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }, "Software Development and", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " Design as a Service "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "hero-title-2 flex pt-8"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "mr-4 py-4",
     src: "/images/Chevron_right.png"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-col md:w-1/4 mb-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SingleSelect__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiSelect__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ReactRotatingText, {
+    className: "pt-2 text-5xl font-bold",
+    items: ['Website', 'Android', 'iOS', 'Artificial Intelligence', 'Chatbot'],
+    color: "#ffffff",
+    typingInterval: 100,
+    deletingInterval: 100,
+    pause: 1800
+  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    className: "flex flex-col w-1/3 mx-4 mt-12"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SingleSelect__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiSelect__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex mx-4 justify-between w-full"
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    type: "submit",
+    className: "bg-blue-lighter text-base rounded px-12 py-6"
+  }, "Get Estimate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: "bg-transparent hover:bg-blue-lighter border-2 border-blue-lighter text-white hover:text-black text-base rounded px-12 py-6"
+  }, "See Portfolio")))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Hero);
@@ -87178,6 +87446,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.esm.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -87272,7 +87542,15 @@ function (_Component) {
         isSearchable: isSearchable,
         name: "industry",
         options: industryOptions,
-        placeholder: "Choose Your Industry..."
+        placeholder: "Choose Your Industry...",
+        styles: {
+          dropdownIndicator: function dropdownIndicator(base, state) {
+            return _objectSpread({}, base, {
+              transition: "all .4s ease",
+              transform: state.selectProps.menuIsOpen ? "rotate(180deg)" : null
+            });
+          }
+        }
       }));
     }
   }]);
@@ -87302,8 +87580,8 @@ function (_Component) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/shads/Code/flexbox/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/shads/Code/flexbox/resources/sass/style.sass */"./resources/sass/style.sass");
+__webpack_require__(/*! /Users/azadarsyad/Code/flexbox/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/azadarsyad/Code/flexbox/resources/sass/style.sass */"./resources/sass/style.sass");
 
 
 /***/ }),

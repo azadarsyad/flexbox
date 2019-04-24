@@ -8,7 +8,7 @@
 	background-color:#0640A3
 
 .hero-height 
-	height: 80vh
+	height: 75vh
 
 .hero-shorter-height 
 	height: 60vh
@@ -24,15 +24,36 @@
 	line-height: 66px
 
 .single-select__control
-	@apply py-3 px-2 text-base
+	@apply py-5 px-3 text-base 
+	cursor: (pointer !important)
+
+.single-select__control:hover .single-select__single-value
+	color: (blue !important)
 
 .single-select__option
 	border-bottom: (0.01em solid #D7D7D7 !important)
-	padding: (20px !important)
+	padding: (30px !important)
+	cursor: (pointer !important)
 
 .api-select__control
-	@apply py-3 px-2 text-base
+	@apply py-5 px-3 text-base
+	cursor: (pointer !important)
 
 .api-select__option
 	border-bottom: (0.01em solid #D7D7D7 !important)
-	padding: (20px !important)
+	padding: (30px !important)
+	cursor: (pointer !important)
+
+.react-rotating-text-cursor
+	animation: blinking-cursor 0.8s cubic-bezier(0.68, 0.01, 0.01, 0.99) 0s infinite
+
+@keyframes blinking-cursor 
+	0%	
+		opacity: 0
+  
+	50% 
+		opacity: 1
+  
+	100% 
+		opacity: 0
+  
