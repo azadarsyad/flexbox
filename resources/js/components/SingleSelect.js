@@ -39,6 +39,7 @@ export default class SingleSelect extends Component<*, State> {
           isClearable={isClearable}
           isSearchable={isSearchable}
           name="industry"
+          ref="industry"
           options={industryOptions}
           placeholder="Choose Your Industry..."
           styles={{

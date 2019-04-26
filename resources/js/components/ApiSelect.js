@@ -56,6 +56,8 @@ export default class ApiSelect extends Component {
       <div>
         <AsyncSelect
           className="w-full mx-4 my-3"
+          name="benchmark"
+          ref="benchmark"
           classNamePrefix="api-select"
           cacheOptions
           loadOptions={promiseOptions}

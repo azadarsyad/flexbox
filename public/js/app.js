@@ -87232,6 +87232,8 @@ function (_Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select_lib_Async__WEBPACK_IMPORTED_MODULE_1___default.a, {
         className: "w-full mx-4 my-3",
+        name: "benchmark",
+        ref: "benchmark",
         classNamePrefix: "api-select",
         cacheOptions: true,
         loadOptions: promiseOptions,
@@ -87383,11 +87385,32 @@ var Header = function Header() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Hero; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _SingleSelect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SingleSelect */ "./resources/js/components/SingleSelect.js");
 /* harmony import */ var _ApiSelect__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ApiSelect */ "./resources/js/components/ApiSelect.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -87395,40 +87418,77 @@ __webpack_require__.r(__webpack_exports__);
 
 var ReactRotatingText = __webpack_require__(/*! react-rotating-text */ "./node_modules/react-rotating-text/lib/ReactRotatingText.js");
 
-var Hero = function Hero() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bg-header hero-height"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container mx-auto hero-shorter-height flex items-center"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex flex-col"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "hero-title-1"
-  }, "Software Development and", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " Design as a Service "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-    className: "hero-title-2 flex pt-8"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    className: "mr-4 py-4",
-    src: "/images/Chevron_right.png"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ReactRotatingText, {
-    className: "pt-2 text-5xl font-bold",
-    items: ['Website', 'Android', 'iOS', 'Artificial Intelligence', 'Chatbot'],
-    color: "#ffffff",
-    typingInterval: 100,
-    deletingInterval: 100,
-    pause: 1800
-  }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-    className: "flex flex-col w-1/3 mx-4 mt-12"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SingleSelect__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiSelect__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex mx-4 justify-between w-full"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    type: "submit",
-    className: "bg-blue-lighter text-base rounded px-12 py-6"
-  }, "Get Estimate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "bg-transparent hover:bg-blue-lighter border-2 border-blue-lighter text-white hover:text-black text-base rounded px-12 py-6"
-  }, "See Portfolio")))));
-};
+var Hero =
+/*#__PURE__*/
+function (_Component) {
+  _inherits(Hero, _Component);
 
-/* harmony default export */ __webpack_exports__["default"] = (Hero);
+  function Hero() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    _classCallCheck(this, Hero);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(Hero)).call.apply(_getPrototypeOf2, [this].concat(args)));
+
+    _defineProperty(_assertThisInitialized(_this), "handleSubmit", function (event) {
+      event.preventDefault();
+      alert('Your industry is: ' + _this.refs['industry'].value);
+    });
+
+    return _this;
+  }
+
+  _createClass(Hero, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bg-header hero-height"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container mx-auto hero-shorter-height flex items-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flex flex-col"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "hero-title-1"
+      }, "Software Development and", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " Design as a Service "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "hero-title-2 flex pt-8"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "mr-4 py-4",
+        src: "/images/Chevron_right.png"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ReactRotatingText, {
+        className: "pt-2 text-5xl font-bold",
+        items: ['Website', 'Android', 'iOS', 'Artificial Intelligence', 'Chatbot'],
+        color: "#ffffff",
+        typingInterval: 100,
+        deletingInterval: 100,
+        pause: 1800
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        className: "flex flex-col w-1/3 mx-4 mt-12",
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SingleSelect__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        ref: "industry"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ApiSelect__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        ref: "benchmark"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "flex mx-4 justify-between w-full"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "bg-blue-lighter text-base rounded px-12 py-6"
+      }, "Get Estimate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "bg-transparent hover:bg-blue-lighter border-2 border-blue-lighter text-white hover:text-black text-base rounded px-12 py-6"
+      }, "See Portfolio")))));
+    }
+  }]);
+
+  return Hero;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+
 
 /***/ }),
 
@@ -87541,6 +87601,7 @@ function (_Component) {
         isClearable: isClearable,
         isSearchable: isSearchable,
         name: "industry",
+        ref: "industry",
         options: industryOptions,
         placeholder: "Choose Your Industry...",
         styles: {
