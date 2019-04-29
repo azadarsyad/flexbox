@@ -17,3 +17,5 @@ mix.react('resources/js/app.js', 'public/js')
       processCssUrls: false,
       postCss: [ tailwindcss('./tailwind.js') ],
     });
+
+mix.browserSync('flexbox.test');

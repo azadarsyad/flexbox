@@ -28428,6 +28428,10 @@ table {
   }
 }
 
+button:focus {
+  outline: 0;
+}
+
 .bg-header {
   background-color: #0640a3;
 }
@@ -28440,8 +28444,63 @@ table {
   height: 60vh;
 }
 
+.active-btn {
+  cursor: pointer;
+  background-color: #fff;
+  color: #31394f;
+  font-size: 1.25rem;
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-width: 1px;
+  border-color: #b8c2cc;
+  border-right-width: 0;
+  border-top-left-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+  border-bottom-width: 4px;
+  border-bottom: 4px solid #0640a3;
+}
+
+.noBtn-active {
+  border-right: 1px solid #b8c2cc !important;
+  border-bottom-right-radius: .25rem !important;
+  border-top-right-radius: .25rem !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+}
+
+.yesBtn-inactive {
+  border-right: 0px !important;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: .25rem !important;
+  border-top-left-radius: .25rem !important;
+}
+
+.inactive-btn {
+  cursor: pointer;
+  background-color: transparent;
+  color: #8795a1;
+  font-size: 1.25rem;
+  width: 100%;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-width: 1px;
+  border-color: #b8c2cc;
+  border-top-right-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+}
+
 .text-blue-white {
   color: #f2f8ff;
+}
+
+.this-blue {
+  color: #0640a3;
+}
+
+.this-black {
+  color: #31394f;
 }
 
 .hero-title-1 {

@@ -4,6 +4,9 @@
 @tailwind screens
 
 
+button:focus 
+	outline:0
+
 .bg-header  
 	background-color:#0640A3
 
@@ -13,8 +16,35 @@
 .hero-shorter-height 
 	height: 60vh
 
+.active-btn
+	@apply cursor-pointer bg-white this-black text-xl w-full py-6 border border-grey border-r-0 rounded-l border-b-4
+	border-bottom: 4px solid #0640A3
+
+.noBtn-active
+	border-right: (1px solid #b8c2cc !important)
+	border-bottom-right-radius: (.25rem !important)
+	border-top-right-radius: (.25rem !important)
+	border-bottom-left-radius: (0 !important)
+	border-top-left-radius: (0 !important)
+
+.yesBtn-inactive
+	border-right: (0px !important)
+	border-bottom-right-radius: (0 !important)
+	border-top-right-radius: (0 !important)
+	border-bottom-left-radius: (.25rem !important)
+	border-top-left-radius: (.25rem !important)
+
+.inactive-btn
+	@apply cursor-pointer bg-transparent text-grey-dark text-xl w-full py-6 border border-grey rounded-r
+
 .text-blue-white 
 	color: #F2F8FF
+
+.this-blue
+	color: #0640A3
+
+.this-black
+	color: #31394F
 
 .hero-title-1 
 	color: #AFD3FF	

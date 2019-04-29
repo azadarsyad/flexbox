@@ -50,8 +50,30 @@ const promiseOptions = inputValue =>
     }, 1000);
   });
 
-export default class ApiSelect extends Component {
+type State = {
+  benchmark: String,
+  imageUrl: String,
+};
+
+export default class ApiSelect extends Component<*, State> {
+
+  state = {
+    benchmark: '',
+    imageUrl: '',
+  };
+
+  handleChange = (opt) => {
+    this.setState(state => ({ benchmark: opt.value }));
+    this.setState(state => ({ imageUrl: opt.image }));
+    const { onOptionChange } = this.props;
+    onOptionChange(opt);
+  }
+
   render() {
+    const {
+      benchmark,
+      imageUrl,
+    } = this.state;
     return (
       <div>
         <AsyncSelect
@@ -64,6 +86,7 @@ export default class ApiSelect extends Component {
           defaultOptions
           placeholder="Search Benchmark"
           isClearable={true}
+          onChange={opt => this.handleChange(opt)}
           components={{ Option: IconOption, SingleValue: IconSingleValue }}
           styles={{
             dropdownIndicator: (base, state) => ({

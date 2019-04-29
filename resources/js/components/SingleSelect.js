@@ -13,18 +13,27 @@ const industryOptions = [
 type State = {
   isClearable: boolean,
   isSearchable: boolean,
+  industry: String,
 };
 
 export default class SingleSelect extends Component<*, State> {
   state = {
     isClearable: true,
     isSearchable: true,
+    industry: '',
   };
 
   toggleClearable = () =>
     this.setState(state => ({ isClearable: !state.isClearable }));
   toggleSearchable = () =>
     this.setState(state => ({ isSearchable: !state.isSearchable }));
+
+  handleChange = (opt) => {
+    const { onOptionChange } = this.props;
+    this.setState(state => ({ industry: opt.value }));
+    onOptionChange(opt);
+  }
+
   render() {
     const {
       isClearable,
@@ -38,6 +47,7 @@ export default class SingleSelect extends Component<*, State> {
           defaultValue={industryOptions[0]}
           isClearable={isClearable}
           isSearchable={isSearchable}
+          onChange={opt => this.handleChange(opt)}
           name="industry"
           ref="industry"
           options={industryOptions}
