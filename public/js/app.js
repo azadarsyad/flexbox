@@ -88732,23 +88732,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var items = [{
   key: 'hasDesign',
   value: 2000,
-  role: 'UI/UX Designer'
+  role: 'UI/UX Designer',
+  days: 5
 }, {
   key: 'hasPayment',
   value: 1800,
-  role: null
+  role: null,
+  days: 2
 }, {
   key: 'hasCMS',
   value: 2100,
-  role: null
+  role: null,
+  days: 7
 }, {
   key: 'hasBackend',
   value: 1900,
-  role: 'Back-end Developer'
+  role: 'Back-end Developer',
+  days: 5
 }, {
   key: 'hasFrontend',
   value: 2500,
-  role: 'Front-end Developer'
+  role: 'Front-end Developer',
+  days: 7
 }];
 
 var Estimate =
@@ -88820,10 +88825,22 @@ function (_Component) {
             price: _this.state.price + item.value
           };
         });
+
+        _this.setState(function (state) {
+          return {
+            duration: Math.round((_this.state.duration * 4 + item.days) / 4)
+          };
+        });
       } else {
         _this.setState(function (state) {
           return {
             price: _this.state.price - item.value
+          };
+        });
+
+        _this.setState(function (state) {
+          return {
+            duration: Math.round((_this.state.duration * 4 - item.days) / 4)
           };
         });
       }
@@ -88834,26 +88851,30 @@ function (_Component) {
         industry: _this.props.location.state.data.industry,
         benchmark: _this.props.location.state.data.benchmark,
         imageUrl: _this.props.location.state.data.imageUrl,
-        price: 0,
-        duration: 0,
+        price: 10300,
+        duration: 11,
         hasPayment: true,
         hasCMS: true,
         hasBackend: true,
         hasFrontend: true,
-        hasDesign: true
+        hasDesign: true,
+        isLoading: false,
+        error: false
       };
     } else if (sessionStorage.industry) {
       _this.state = {
         industry: sessionStorage.industry,
         benchmark: sessionStorage.benchmark,
         imageUrl: sessionStorage.imageUrl,
-        price: 0,
-        duration: 0,
+        price: 10300,
+        duration: 11,
         hasPayment: true,
         hasCMS: true,
         hasBackend: true,
         hasFrontend: true,
-        hasDesign: true
+        hasDesign: true,
+        isLoading: false,
+        error: false
       };
     } else {
       window.location.href = '/';
@@ -88863,6 +88884,36 @@ function (_Component) {
   }
 
   _createClass(Estimate, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.setState({
+        isLoading: true
+      });
+      var API = "https://u9yiyc7rch.execute-api.ap-southeast-1.amazonaws.com/default/tech-list?query=".concat(this.state.benchmark);
+      alert(API);
+      axios.get(API, {
+        crossDomain: true,
+        headers: {
+          "x-api-key": "sEW2Ucs8tC1BWECmkeUBF1miKbQbTG0D4Pqv3ptm"
+        }
+      }).then(function (result) {
+        var data = JSON.parse(result.data);
+        console.log(data); // this.setState({
+        //   hits: result.data.hits,
+        //   isLoading: false
+        // });
+      })["catch"](function (error) {
+        alert(error);
+
+        _this2.setState({
+          error: true,
+          isLoading: false
+        });
+      });
+    }
+  }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       if (!sessionStorage.industry) {
@@ -88878,7 +88929,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container mx-auto p-2 py-8"
@@ -88921,7 +88972,7 @@ function (_Component) {
         className: "text-grey pt-12 text-sm font-bold"
       }, "DURATION (WEEKS)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-4xl this-black font-bold pt-4"
-      }, "12", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.duration, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pricing-control"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-xl this-black font-bold pt-4"
@@ -88934,18 +88985,18 @@ function (_Component) {
         className: "flex pt-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(yesDesignBtn) {
-          _this2.yesDesignBtn = yesDesignBtn;
+          _this3.yesDesignBtn = yesDesignBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.yesDesignBtn, _this2.noDesignBtn, true, 0);
+          return _this3.toggleItem(_this3.yesDesignBtn, _this3.noDesignBtn, true, 0);
         },
         className: "active-btn"
       }, "Yes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(noDesignBtn) {
-          _this2.noDesignBtn = noDesignBtn;
+          _this3.noDesignBtn = noDesignBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.noDesignBtn, _this2.yesDesignBtn, false, 0);
+          return _this3.toggleItem(_this3.noDesignBtn, _this3.yesDesignBtn, false, 0);
         },
         className: "inactive-btn flex justify-between px-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -88965,25 +89016,25 @@ function (_Component) {
         className: "flex pt-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(yesPaymentBtn) {
-          _this2.yesPaymentBtn = yesPaymentBtn;
+          _this3.yesPaymentBtn = yesPaymentBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.yesPaymentBtn, _this2.noPaymentBtn, true, 1);
+          return _this3.toggleItem(_this3.yesPaymentBtn, _this3.noPaymentBtn, true, 1);
         },
         className: "active-btn"
       }, "Yes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(noPaymentBtn) {
-          _this2.noPaymentBtn = noPaymentBtn;
+          _this3.noPaymentBtn = noPaymentBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.noPaymentBtn, _this2.yesPaymentBtn, false, 1);
+          return _this3.toggleItem(_this3.noPaymentBtn, _this3.yesPaymentBtn, false, 1);
         },
         className: "inactive-btn flex justify-between px-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
       }, "No"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
-      }, "- MYR", items[0].value)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "- MYR", items[1].value)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pt-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-xl this-black font-bold pt-4"
@@ -88996,25 +89047,25 @@ function (_Component) {
         className: "flex pt-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(yesCMSBtn) {
-          _this2.yesCMSBtn = yesCMSBtn;
+          _this3.yesCMSBtn = yesCMSBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.yesCMSBtn, _this2.noCMSBtn, true, 2);
+          return _this3.toggleItem(_this3.yesCMSBtn, _this3.noCMSBtn, true, 2);
         },
         className: "active-btn"
       }, "Yes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(noCMSBtn) {
-          _this2.noCMSBtn = noCMSBtn;
+          _this3.noCMSBtn = noCMSBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.noCMSBtn, _this2.yesCMSBtn, false, 2);
+          return _this3.toggleItem(_this3.noCMSBtn, _this3.yesCMSBtn, false, 2);
         },
         className: "inactive-btn flex justify-between px-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
       }, "No"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
-      }, "- MYR", items[0].value)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "- MYR", items[2].value)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pt-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-xl this-black font-bold pt-4"
@@ -89027,25 +89078,25 @@ function (_Component) {
         className: "flex pt-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(yesBackendBtn) {
-          _this2.yesBackendBtn = yesBackendBtn;
+          _this3.yesBackendBtn = yesBackendBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.yesBackendBtn, _this2.noBackendBtn, true, 3);
+          return _this3.toggleItem(_this3.yesBackendBtn, _this3.noBackendBtn, true, 3);
         },
         className: "active-btn"
       }, "Yes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(noBackendBtn) {
-          _this2.noBackendBtn = noBackendBtn;
+          _this3.noBackendBtn = noBackendBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.noBackendBtn, _this2.yesBackendBtn, false, 3);
+          return _this3.toggleItem(_this3.noBackendBtn, _this3.yesBackendBtn, false, 3);
         },
         className: "inactive-btn flex justify-between px-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
       }, "No"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
-      }, "- MYR", items[0].value)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "- MYR", items[3].value)))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pt-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         className: "text-xl this-black font-bold pt-4"
@@ -89058,25 +89109,25 @@ function (_Component) {
         className: "flex pt-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(yesFrontendBtn) {
-          _this2.yesFrontendBtn = yesFrontendBtn;
+          _this3.yesFrontendBtn = yesFrontendBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.yesFrontendBtn, _this2.noFrontendBtn, true, 4);
+          return _this3.toggleItem(_this3.yesFrontendBtn, _this3.noFrontendBtn, true, 4);
         },
         className: "active-btn"
       }, "Yes"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         ref: function ref(noFrontendBtn) {
-          _this2.noFrontendBtn = noFrontendBtn;
+          _this3.noFrontendBtn = noFrontendBtn;
         },
         onClick: function onClick() {
-          return _this2.toggleItem(_this2.noFrontendBtn, _this2.yesFrontendBtn, false, 4);
+          return _this3.toggleItem(_this3.noFrontendBtn, _this3.yesFrontendBtn, false, 4);
         },
         className: "inactive-btn flex justify-between px-4"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
       }, "No"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: ""
-      }, "- MYR", items[0].value)))))));
+      }, "- MYR", items[4].value)))))));
     }
   }]);
 
